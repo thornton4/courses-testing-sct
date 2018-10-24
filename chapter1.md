@@ -30,14 +30,12 @@ I wish I knew what to tell you bud!
 ```{r}
 x=c(10,11,13,16)
 x[2:4]-x[1:3]
-x[3:4]-x[1:2]
 ```
 
 `@solution`
 ```{r}
 x=c(10,11,13,16)
 x[2:4]-x[1:3]
-x[3:4]-x[1:2]
 ```
 
 `@sct`
