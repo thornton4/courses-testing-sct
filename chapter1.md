@@ -62,5 +62,5 @@ ex() %>% check_function("lm",index=2) %>% {
   check_arg(., "formula") %>% check_equal()
   check_arg(., "data") %>% check_equal()
 }
-ex() %>% check_function("summary",index=2) %>% checj_result() %>% check_equal()
+ex() %>% check_function("summary",index=2) %>% check_result() %>% check_equal()
 ```
