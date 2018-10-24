@@ -52,7 +52,7 @@ summary(Term_mlr4)
 ```{r}
 ex() %>% check_function("round") %>% check_result() %>% check_equal()
 ex() %>% check_object("Term_mlr3") %>% check_equal()
-ex() %>% check_functiion("lm",index=1) %>% {
+ex() %>% check_function("lm",index=1) %>% {
   check_arg(., "formula") %>% check_equal()
   check_arg(., "data") %>% check_equal()
 }
