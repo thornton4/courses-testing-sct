@@ -42,6 +42,5 @@ x[3:4]-x[1:2]
 
 `@sct`
 ```{r}
-ex() %>% check_operator("-",index=1) %>% check_result() %>% check_equal()
-ex() %>% check_operator("-",index=2) %>% check_result() %>% check_equal()
+ex() %>% check_output_expr(x[2:4]-x[1:3])
 ```
