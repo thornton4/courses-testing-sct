@@ -28,15 +28,17 @@ I wish I knew what to tell you bud!
 
 `@sample_code`
 ```{r}
-sum(c(1, 2, 3, 4, NA), na.rm = TRUE)
+x=c(10,11,13,16)
+x[2]-x[1]
 ```
 
 `@solution`
 ```{r}
-sum(c(1, 2, 3, 4, NA), na.rm = TRUE)
+x=c(10,11,13,16)
+x[2]-x[1]
 ```
 
 `@sct`
 ```{r}
-ex() %>% check_output_expr("10", missing_msg = "Did you correctly print out the sum?")
+ex() %>% check_output_expr("1", missing_msg = "Did the thing?")
 ```
