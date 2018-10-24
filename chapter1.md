@@ -51,4 +51,10 @@ ex() %>% check_object("Term2") %>% {
   check_column(., "face") %>% check_equal()
   check_column(., "income") %>% check_equal()
  }
+ex() %>% check_object("Term_mlr1") %>% check_equal()
+ex() %>% check_function("lm") %>% {
+  check_arg(., "formula") %>% check_equal()
+  check_arg(., "data") %>% check_equal()
+}
+ex() %>% check_function("summary") %>% check_result() %>% check_equal()
 ```
