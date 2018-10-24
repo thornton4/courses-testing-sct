@@ -28,15 +28,16 @@ I wish I knew what to tell you bud!
 
 `@sample_code`
 ```{r}
-
+x=c(10,11,13,16)
+x[2:4]-x[1:3]
 ```
 
 `@solution`
 ```{r}
-
+x[2:4]-x[1:3]
 ```
 
 `@sct`
 ```{r}
-
+ex() %>% check_output_expr(c("1","2","3"))
 ```
