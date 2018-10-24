@@ -30,16 +30,18 @@ I wish I knew what to tell you bud!
 ```{r}
 x=c(10,11,13,16)
 x[2:4]-x[1:3]
+x[3:4]-x[1:2]
 ```
 
 `@solution`
 ```{r}
 x=c(10,11,13,16)
 x[2:4]-x[1:3]
+x[3:4]-x[1:2]
 ```
 
 `@sct`
 ```{r}
-#ex() %>% check_output_expr("1", missing_msg = "Did the thing?")
-ex() %>% check_operator("-") %>% check_result() %>% check_equal()
+ex() %>% check_operator("-",index=1) %>% check_result() %>% check_equal()
+ex() %>% check_operator("-",index=2) %>% check_result() %>% check_equal()
 ```
