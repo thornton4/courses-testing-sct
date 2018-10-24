@@ -40,5 +40,5 @@ x[2:4]-x[1:3]
 
 `@sct`
 ```{r}
-ex() %>% check_output_expr(x[2:4]-x[1:3])
+ex() %>% check_output_expr(c(x[2:4]-x[1:3]))
 ```
