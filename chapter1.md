@@ -40,5 +40,6 @@ x[2]-x[1]
 
 `@sct`
 ```{r}
-ex() %>% check_output_expr("1", missing_msg = "Did the thing?")
+#ex() %>% check_output_expr("1", missing_msg = "Did the thing?")
+ex() %>% check_function("-") %>% check_result() %>% check_equal()
 ```
