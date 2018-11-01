@@ -81,7 +81,6 @@ crossvalfct(explvars.3)
 `@sct`
 ```{r}
 ex() %>% check_object("explvars.1") %>% check_equal()
-ex() %>% check_fuction("crossvalfct",index=1) %>% check_arg(., "explvars") %>% check_equal()
-ex() %>% check_object("explvars.1") %>% check_equal()  
+ex() %>% check_fuction("crossvalfct",index=1) %>% check_arg(., "explvars") %>% check_equal() 
 success_msg("Excellent! This exercises demonstrates the use of cross-validation, a very important technique in model selection. The exercise builds the procedure from the ground up so that you can see all the steps involved. Further, it illustrates how you can develop your own functions to automate procedures and save steps.")
 ```
