@@ -31,8 +31,8 @@ meps <- read.csv("https://assets.datacamp.com/production/repositories/2610/datas
 ```{r}
 #str(meps)
 #summary(meps)
-table(meps$race)
-#par(mfrow = c(1, 2))
+#table(meps$race)
+par(mfrow = c(1, 2))
 #hist(meps$expendop, main = "", xlab = "outpatient expenditures")
 #hist(log(meps$expendop), main = "", xlab = "log expenditures")
 #par(mfrow = c(1, 1))
@@ -61,5 +61,5 @@ table(meps$race)
 
 `@sct`
 ```{r}
-ex() %>% check_function("table") %>% check_result() %>% check_equal()
+ex() %>% check_function("par",index=1) %>% check_arg(., "mfrow") %>% check_equal()
 ```
