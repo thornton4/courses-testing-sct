@@ -23,68 +23,43 @@ I wish I knew what to tell you bud!
 
 `@pre_exercise_code`
 ```{r}
-#Term <- read.csv("CSVData\\term_life.csv", header = TRUE)
-Term <- read.csv("https://assets.datacamp.com/production/repositories/2610/datasets/efc64bc2d78cf6b48ad2c3f5e31800cb773de261/term_life.csv", header = TRUE)
-Term1 <- subset(Term, subset = face > 0)
-Term1$marstat <- as.factor(Term1$marstat)
-
-crossvalfct <- function(explvars){
-  cvdata   <- shuffled_Term1[, c("logface", explvars)]
-  crossval <- 0
-  k <- 5
-  for (i in 1:k) {
-    indices <- (((i-1) * round((1/k)*nrow(cvdata))) + 1):((i*round((1/k) * nrow(cvdata))))
-    # Exclude them from the train set
-    train_mlr <- lm(logface ~ ., data = cvdata[-indices,])
-    # Include them in the test set
-    test  <- data.frame(cvdata[indices, explvars])
-    names(test)  <- explvars
-    predict_test <- exp(predict(train_mlr, test))
-    # Compare predicted to held-out and summarize
-    predict_err  <- exp(cvdata[indices, "logface"]) - predict_test
-    crossval <- crossval + sum(abs(predict_err))
-  }
-  crossval/1000000
-}
+#meps <- read.csv("CSVData\\HealthMeps.csv", header = TRUE)
+meps <- read.csv("https://assets.datacamp.com/production/repositories/2610/datasets/7b7dab6d0c528e4cd2f8d0e0fc7824a254429bf8/HealthMeps.csv", header = TRUE)
 ```
 
 `@sample_code`
 ```{r}
-# Randomly re-order data - "shuffle it"
-n <- nrow(Term1)
-set.seed(12347)
-shuffled_Term1 <- Term1[sample(n), ]
-# Cross - Validation
-explvars.1 <- c("logincome")
-crossvalfct(explvars.1)
-explvars.2 <- c("education", "numhh", "logincome")
-crossvalfct(explvars.2)
-explvars.3 <- c("education", "numhh", "logincome", "marstat")
-crossvalfct(explvars.3)
+#str(meps)
+#summary(meps)
+table(meps$race)
+#par(mfrow = c(1, 2))
+#hist(meps$expendop, main = "", xlab = "outpatient expenditures")
+#hist(log(meps$expendop), main = "", xlab = "log expenditures")
+#par(mfrow = c(1, 1))
+#meps$logexpend <- log(meps$expendop)
+#boxplot(logexpend ~ phstat, data = meps, main = "boxplot of log expend")
+#plot(meps$age,meps$logexpend, xlab = "age", ylab = "log expend")
+#lines(lowess(meps$age, meps$logexpend), col="red")
+
 ```
 
 `@solution`
 ```{r}
-# Randomly re-order data - "shuffle it"
-n <- nrow(Term1)
-set.seed(12347)
-shuffled_Term1 <- Term1[sample(n), ]
-# Cross - Validation
-explvars.1 <- c("logincome")
-crossvalfct(explvars.1)
-explvars.2 <- c("education", "numhh", "logincome")
-crossvalfct(explvars.2)
-explvars.3 <- c("education", "numhh", "logincome", "marstat")
-crossvalfct(explvars.3)
+#str(meps)
+#summary(meps)
+table(meps$race)
+#par(mfrow = c(1, 2))
+#hist(meps$expendop, main = "", xlab = "outpatient expenditures")
+#hist(log(meps$expendop), main = "", xlab = "log expenditures")
+#par(mfrow = c(1, 1))
+#meps$logexpend <- log(meps$expendop)
+#boxplot(logexpend ~ phstat, data = meps, main = "boxplot of log expend")
+#plot(meps$age,meps$logexpend, xlab = "age", ylab = "log expend")
+#lines(lowess(meps$age, meps$logexpend), col="red")
+
 ```
 
 `@sct`
 ```{r}
-ex() %>% check_object("explvars.1") %>% check_equal()
-ex() %>% check_function("crossvalfct",index=1) %>% check_arg(., "explvars") %>% check_equal()
-ex() %>% check_object("explvars.2") %>% check_equal()
-ex() %>% check_function("crossvalfct",index=2) %>% check_arg(., "explvars") %>% check_equal()
-ex() %>% check_object("explvars.3") %>% check_equal()
-ex() %>% check_function("crossvalfct",index=3) %>% check_arg(., "explvars") %>% check_equal()
-success_msg("Excellent! This exercises demonstrates the use of cross-validation, a very important technique in model selection. The exercise builds the procedure from the ground up so that you can see all the steps involved. Further, it illustrates how you can develop your own functions to automate procedures and save steps.")
+ex() %>% check_function("table") %>% check_result() %>% check_equal()
 ```
