@@ -25,42 +25,40 @@ I wish I knew what to tell you bud!
 ```{r}
 #meps <- read.csv("CSVData\\HealthMeps.csv", header = TRUE)
 meps <- read.csv("https://assets.datacamp.com/production/repositories/2610/datasets/7b7dab6d0c528e4cd2f8d0e0fc7824a254429bf8/HealthMeps.csv", header = TRUE)
+meps$logexpend <- log(meps$expendop)
 ```
 
 `@sample_code`
 ```{r}
-#str(meps)
-#summary(meps)
-#table(meps$race)
-#par(mfrow = c(1, 2))
-hist(meps$expendop, main = "", xlab = "outpatient expenditures")
-hist(log(meps$expendop), main = "", xlab = "log expenditures")
-#par(mfrow = c(1, 1))
-#meps$logexpend <- log(meps$expendop)
-#boxplot(logexpend ~ phstat, data = meps, main = "boxplot of log expend")
-#plot(meps$age,meps$logexpend, xlab = "age", ylab = "log expend")
-#lines(lowess(meps$age, meps$logexpend), col="red")
-
+n <- nrow(meps)
+set.seed(12347)
+shuffled_meps <- meps[sample(n), ]
+train_indices <- 1:round(0.75 * n)
+train_meps    <- shuffled_meps[train_indices, ]
+test_indices  <- (round(0.25 * n) + 1):n
+test_meps     <- shuffled_meps[test_indices, ]
+meps_mlr1 <- lm(expendop ~ gender + age + race + region + educ + phstat + mpoor + anylimit + income + insure + usc + unemploy + managedcare, data = train_meps)
+summary(meps_mlr1)
+par(mfrow = c(2, 2))
+plot(meps_mlr1)
 ```
 
 `@solution`
 ```{r}
-#str(meps)
-#summary(meps)
-#table(meps$race)
-#par(mfrow = c(1, 2))
-hist(meps$expendop, main = "", xlab = "outpatient expenditures")
-hist(log(meps$expendop), main = "", xlab = "log expenditures")
-#par(mfrow = c(1, 1))
-#meps$logexpend <- log(meps$expendop)
-#boxplot(logexpend ~ phstat, data = meps, main = "boxplot of log expend")
-#plot(meps$age,meps$logexpend, xlab = "age", ylab = "log expend")
-#lines(lowess(meps$age, meps$logexpend), col="red")
-
+n <- nrow(meps)
+set.seed(12347)
+shuffled_meps <- meps[sample(n), ]
+train_indices <- 1:round(0.75 * n)
+train_meps    <- shuffled_meps[train_indices, ]
+test_indices  <- (round(0.25 * n) + 1):n
+test_meps     <- shuffled_meps[test_indices, ]
+meps_mlr1 <- lm(expendop ~ gender + age + race + region + educ + phstat + mpoor + anylimit + income + insure + usc + unemploy + managedcare, data = train_meps)
+summary(meps_mlr1)
+par(mfrow = c(2, 2))
+plot(meps_mlr1)
 ```
 
 `@sct`
 ```{r}
-ex() %>% check_function("hist",index=1) %>% check_arg(., "x") %>% check_equal()
-ex() %>% check_function("hist",index=2) %>% check_arg(., "x") %>% check_equal()
+ex() %>% check_function("plot") %>% check_arg(., "formula") %>% check_equal()
 ```
