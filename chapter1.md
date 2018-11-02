@@ -39,8 +39,9 @@ test_indices  <- (round(0.25 * n) + 1):n
 test_meps     <- shuffled_meps[test_indices, ]
 meps_mlr1 <- lm(expendop ~ gender + age + race + region + educ + phstat + mpoor + anylimit + income + insure + usc + unemploy + managedcare, data = train_meps)
 summary(meps_mlr1)
+meps_mlr2 <- lm(logexpend ~ gender + age + race + region + educ + phstat + mpoor + anylimit + income + insure + usc + unemploy + managedcare, data = train_meps)
 par(mfrow = c(2, 2))
-plot(meps_mlr1)
+plot(meps_mlr2)
 ```
 
 `@solution`
