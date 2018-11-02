@@ -61,5 +61,5 @@ plot(meps_mlr1)
 
 `@sct`
 ```{r}
-ex() %>% check_function("plot") %>% check_arg(., "formula") %>% check_equal()
+ex() %>% check_function("plot") %>% check_arg(., "x") %>% check_equal()
 ```
