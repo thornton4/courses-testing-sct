@@ -61,5 +61,5 @@ table(meps$race)
 
 `@sct`
 ```{r}
-ex() %>% check_function("table") %>% check_arg("x") %>% check_equal()
+ex() %>% check_function("table") %>% check_result() %>% check_equal()
 ```
