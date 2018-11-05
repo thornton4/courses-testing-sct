@@ -44,8 +44,8 @@ lines(lowess(meps$age, meps$logexpend), col="red")
 
 `@solution`
 ```{r}
-str(meps)
-summary(meps)
+str(meps[,1:14])
+summary(meps[,1:14])
 table(meps$race)
 par(mfrow = c(1, 2))
 hist(meps$expendop, main = "", xlab = "outpatient expenditures")
