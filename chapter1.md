@@ -59,6 +59,7 @@ lines(lowess(meps$age, meps$logexpend), col="red")
 
 `@sct`
 ```{r}
+ex() %>% check_object("meps") %>% check_column("logexpend") %>% check_equal()
 ex() %>% check_function("str") %>% check_result() %>% check_equal()
 ex() %>% check_function("summary") %>% check_result() %>% check_equal()
 ex() %>% check_function("table") %>% check_result() %>% check_equal()
@@ -66,7 +67,6 @@ ex() %>% check_function("par",index=1) %>% check_arg(., "mfrow") %>% check_equal
 ex() %>% check_function("hist",index=1) %>% check_arg(., "x") %>% check_equal()
 ex() %>% check_function("hist",index=2) %>% check_arg(., "x") %>% check_equal()
 ex() %>% check_function("par",index=2) %>% check_arg(., "mfrow") %>% check_equal()
-ex() %>% check_object("meps") %>% check_column("logexpend") %>% check_equal()
 ex() %>% check_function("boxplot") %>% {
   check_arg(., "formula") %>% check_equal()
   check_arg(., "data") %>% check_equal()
