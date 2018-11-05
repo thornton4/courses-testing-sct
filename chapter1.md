@@ -59,7 +59,7 @@ lines(lowess(meps$age, meps$logexpend), col="red")
 
 `@sct`
 ```{r}
-ex() %>% check_function("str") %>% check_arg(., "object") %>% check_equal()
+ex() %>% check_function("str") %>% check_result() %>% check_equal()
 ex() %>% check_function("summary") %>% check_arg(., "object") %>% check_equal()
 ex() %>% check_function("table") %>% check_result() %>% check_equal()
 ex() %>% check_function("par",index=1) %>% check_arg(., "mfrow") %>% check_equal()
