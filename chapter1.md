@@ -23,7 +23,7 @@ I wish I knew what to tell you bud!
 
 `@pre_exercise_code`
 ```{r}
-#meps <- read.csv("CSVData\\HealthMeps.csv", header = TRUE)
+rm(list=ls())
 meps <- read.csv("https://assets.datacamp.com/production/repositories/2610/datasets/7b7dab6d0c528e4cd2f8d0e0fc7824a254429bf8/HealthMeps.csv", header = TRUE)
 ```
 
