@@ -23,63 +23,33 @@ I wish I knew what to tell you bud!
 
 `@pre_exercise_code`
 ```{r}
-rm(list=ls())
-meps <- read.csv("https://assets.datacamp.com/production/repositories/2610/datasets/7b7dab6d0c528e4cd2f8d0e0fc7824a254429bf8/HealthMeps.csv", header = TRUE)
+#heights <- read.csv("CSVData\\galton_height.csv",header = TRUE)
+heights <- read.csv("https://assets.datacamp.com/production/repositories/2610/datasets/c85ede6c205d22049e766bd08956b225c576255b/galton_height.csv", header = TRUE)
 ```
 
 `@sample_code`
 ```{r}
-str(meps)
-summary(meps)
-table(meps$race)
-par(mfrow = c(1, 2))
-hist(meps$expendop, main = "", xlab = "outpatient expenditures")
-hist(log(meps$expendop), main = "", xlab = "log expenditures")
-par(mfrow = c(1, 1))
-meps$logexpend <- log(meps$expendop)
-boxplot(logexpend ~ phstat, data = meps, main = "boxplot of log expend")
-plot(meps$age,meps$logexpend, xlab = "age", ylab = "log expend")
-lines(lowess(meps$age, meps$logexpend), col="red")
+ht_child <- heights$child_ht
+mchild <- mean(ht_child)
+sdchild <- sd(ht_child)
+pr=pnorm(72, mean = mchild, sd = sdchild
 ```
 
 `@solution`
 ```{r}
-str(meps[,1:14])
-summary(meps[,1:14])
-table(meps$race)
-par(mfrow = c(1, 2))
-hist(meps$expendop, main = "", xlab = "outpatient expenditures")
-hist(log(meps$expendop), main = "", xlab = "log expenditures")
-par(mfrow = c(1, 1))
-meps$logexpend <- log(meps$expendop)
-boxplot(logexpend ~ phstat, data = meps, main = "boxplot of log expend")
-plot(meps$age,meps$logexpend, xlab = "age", ylab = "log expend")
-lines(lowess(meps$age, meps$logexpend), col="red")
+ht_child <- heights$child_ht
+mchild <- mean(ht_child)
+sdchild <- sd(ht_child)
+pr=pnorm(72, mean = mchild, sd = sdchild
 ```
 
 `@sct`
 ```{r}
-ex() %>% check_function("str") %>% check_arg(., "object") %>% check_equal()
-ex() %>% check_function("summary") %>% check_arg(., "object") %>% check_equal()
-ex() %>% check_function("table") %>% check_result() %>% check_equal()
-ex() %>% check_function("par",index=1) %>% check_arg(., "mfrow") %>% check_equal()
-ex() %>% check_object("meps") %>% check_column("logexpend") %>% check_equal()
-ex() %>% check_function("hist",index=1) %>% check_arg(., "x") %>% check_equal()
-ex() %>% check_function("hist",index=2) %>% check_arg(., "x") %>% check_equal()
-ex() %>% check_function("par",index=2) %>% check_arg(., "mfrow") %>% check_equal()
-ex() %>% check_function("boxplot") %>% {
-  check_arg(., "formula") %>% check_equal()
-  check_arg(., "data") %>% check_equal()
-}
-ex() %>% check_function("plot") %>% {
-  check_arg(., "x") %>% check_equal()
-  check_arg(., "y") %>% check_equal()
-}
-ex() %>% check_function("lines") 
-ex() %>% check_function("lowess") %>% {
-  check_arg(., "x") %>% check_equal()
-  check_arg(., "y") %>% check_equal()
-}
-success_msg("Excellent! Summarizing data, without reference to a model, is probably the most time-consuming part of any predictive modeling exercise. Summary statistics are also a key part of any report as they illustrate features of the data that are accessible to a broad audience.")
+ex() %>% check_object("ht_child",undefined_msg="Make sure you assign the children's hight to ht_child") %>% check_equal(incorrect_msg="Remember that in order to call a specific column from a dataframe, use the $ operator")
+ex() %>% check_object("mchild")  %>% check_equal()
+ex() %>% check_object("sdchild") %>% check_equal()
+ex() %>% check_object("pr") %>% check_equal()
+success_msg("Excellent! With this procedure, you can now calculate probabilities for any distribution using a normal curve approximation.")
+
 
 ```
