@@ -55,7 +55,7 @@ ex() %>% check_or(
 check_function(.,"plot",index=2,not_called_msg="did you plot the square root of claims?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified which data should be plotted?") %>% check_equal(incorrect_msg="Make sure to create the second histogram based on the square root of `claims`."),
   override_solution(.,'par(mfrow = c(2, 2))
 plot(density(claims))    
-plot(density(claims^(0.5)))  
+plot(density(sqrt(claims)))  
 plot(density(log(claims)))  
 plot(density(-claims^(-1)))') %>% check_function("plot",index=2,not_called_msg="did you plot the square root of claims?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified which data should be plotted?") %>% check_equal(incorrect_msg="Make sure to create the second histogram based on the square root of `claims`.")
 )
