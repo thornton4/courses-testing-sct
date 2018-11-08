@@ -56,7 +56,7 @@ ex() %>% check_function("hist",not_called_msg="Use the hist command to create a 
 }
 ex() %>% check_function("lines",not_called_msg="Please use the lines function to overlay a normal curve on your histogram") %>% {
   check_arg(., "x",arg_not_specified_msg="Have you specified the independant variable correctly?") %>% check_equal(incorrect_msg="Remeber that we are interested in how probability changes as our value of x changes!")
-  check_Arg(., "y",arg_not_specified_msg="Have you specified the dependant variable correctly?") %>% check_equal(incorrect_msg="Remeber that we are interested in how probability changes as our value of x changes!")
+  check_arg(., "y",arg_not_specified_msg="Have you specified the dependant variable correctly?") %>% check_equal(incorrect_msg="Remeber that we are interested in how probability changes as our value of x changes!")
 }
 ex() %>% check_object("prob", undefined_msg="Make sure to assign the probability of a child's height being greater than 72 inches to prob.") %>% check_equal(incorrect_msg="Make sure to find the probability of a child's height being GREATER than 72 inches.")
 success_msg("Excellent! Visualizing a distribution, especially with reference to a normal, is important for communicating results of your analysis.")
