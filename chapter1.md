@@ -29,34 +29,36 @@ claims <- injury$claims
 
 `@sample_code`
 ```{r}
-logclaims <- log(claims)
-hist(logclaims , breaks = 40,freq = FALSE)
-box()
-plot(density(logclaims))
-plot(density(logclaims, bw = 0.03))
+boxplot(claims)
+q25 <- quantile(claims, probs = 0.25)
+q25
+qn25 <- qnorm(p = 0.25, mean = mean(claims), sd = sd(claims))
+qn25
+qqnorm(claims)
+qqline(claims)   
 ```
 
 `@solution`
 ```{r}
-logclaims <- log(claims)
-hist(logclaims , breaks = 40,freq = FALSE)
-box()
-plot(density(logclaims))
-plot(density(logclaims, bw = 0.03))
+boxplot(claims)
+q25 <- quantile(claims, probs = 0.25)
+q25
+qn25 <- qnorm(p = 0.25, mean = mean(claims), sd = sd(claims))
+qn25
+qqnorm(claims)
+qqline(claims)   
 ```
 
 `@sct`
 ```{r}
-ex() %>% check_object("logclaims",undefined_msg="Make sure to assign the log of the claims data to `logclaims`.") %>% check_equal(incorrect_msg = "You made an error in the definition of the logarithmic claims. Check out the definition of the log() function.")
-ex() %>% check_function("hist",not_called_msg="Make sure to use `hist` to create a histogram.") %>% {
-  check_arg(., "x",arg_not_specified_msg="Did you assign x to be the log of our claims data?") %>% check_equal(incorrect_msg="Please create a histogram of logclaims.")
-  check_arg(., "freq",arg_not_specified_msg="Did you specify that we would like a density histogram?") %>% check_equal(incorrect_msg="Please create a density histogram instead of a frequency histogram.")
-  check_arg(., "breaks",arg_not_specified_msg="Did you specify the number of breaks we would like in our histogram?") %>% check_equal(incorrect_msg="Make sure to set breaks equal to 40!")
-}
-ex() %>% check_function("box",not_called_msg="Make sure to call `box` in order to create a decorative box around our histogram!")
-ex() %>% check_function("plot",index=1,not_called_msg="Have you plotted the density of the log of claims?") %>% check_arg(.,"x",arg_not_specified_msg="Have you specified the data we should use to create the plot?") %>% check_equal(incorrect_msg="Use the density function to plot the density of logclaims.")
-ex() %>% check_function("plot",index=2,not_called_msg="Create another plot using `plot` that displays the density of logarithmic claims with a binwidtch of 0.03.") %>%
-  check_arg(., "x",arg_not_specified_msg="Have you specified the data we should use to create the plot?") %>% check_equal(incorrect_msg="Use the density function to plot the density of logclaims. Also remember that `bw` is an argument of density, not plot.")
-success_msg("Excellent! Visualizing the distribution is important and smoothing techniques allow viewers to see important patterns without being distracted by random fluctations.")
+ex() %>% check_function("boxplot",not_called_msg="Make sure to use `boxplot` to create a visual representation of the data.") %>% check_arg(., "x", arg_not_specified_msg="Have you specified the data R should use to create the boxplot?") %>% check_equal(incorrect_msg="Please create a boxplot of `claims`.")
+ex() %>% check_function("quantile",not_called_msg="Have you called `quantile` to find the empirical percentile?") %>% {
+  check_arg("probs",arg_not_specified_msg="Have you specified what empirical percentile we would like to find?") %>% check_equal(incorrect_msg="If we want to find the Yth percentile, make sure to set probs equal to Y in decimal format.")
+  check_arg(., "x",arg_not_specified_msg="Have you specified which data R should use to find the 25th empirical percentile?") %>% check_equal(incorrect_msg="Make sure to find the 25th empirical percentile of `claims`.")
+ex() %>% check_object("q25",undefined_msg="Make sure to assign the 25th quantile to `q25") %>% check_equal(incorrect_msg="Make sure to find the 25th quantile of claims.")
+ex() %>% check_object("qn25",undefined_msg="Make sure to assign the normal value associated with the 25th percentile to qn25") %>% check_equal(incorrect_msg="We can use a normal approximation to solve for qn25 using `qnorm`.")
+ex() %>% check_function("qqnorm",not_called_msg="Have you called `qqnorm` to create a normal qq plot?") %>% check_arg(., "y",arg_not_specified_msg="Have you specified which data R should use to create the qq plot?") %>% check_equal(incorrect_msg="Make sure that you are creating a qq-plot for `claims`.")
+ex() %>% check_function("qqline",not_called_msg="Have you called `qqline` to overlay a normal line on your qq plot?") %>% check_arg(., "y",arg_not_specified_msg="Have you specified which data R should use to create and plot the line?") %>% check_equal(incorrect_msg="Make sure that you are adding a qq-line for `claims`.")
+success_msg("Congratulations on learning about box and qq plots. Although you are unlikely to show these plots to consumers of your analysis, you will find them useful tools as we explore multivariate aspects of data.")
  
 ```
