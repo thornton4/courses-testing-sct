@@ -29,41 +29,36 @@ claims <- injury$claims
 
 `@sample_code`
 ```{r}
-tail(injury)
-injury2 <- subset(injury, claims < 25000 )
-summary(injury)
-summary(injury2)
-par(mfrow = c(1, 2))
-hist(claims, freq = FALSE,  main = "Full Data")
-hist(injury2$claims, freq = FALSE,  main = "Largest Claim Omitted")  
+par(mfrow = c(2, 2))
+plot(density(claims))    
+plot(density(claims^(0.5)))  
+plot(density(log(claims)))  
+plot(density(-claims^(-1)))  
 ```
 
 `@solution`
 ```{r}
-tail(injury)
-injury2 <- subset(injury, claims < 25000 )
-summary(injury)
-summary(injury2)
-par(mfrow = c(1, 2))
-hist(claims, freq = FALSE,  main = "Full Data")
-hist(injury2$claims, freq = FALSE,  main = "Largest Claim Omitted") 
+par(mfrow = c(2, 2))
+plot(density(claims))    
+plot(density(claims^(0.5)))  
+plot(density(log(claims)))  
+plot(density(-claims^(-1))) 
 ```
 
 `@sct`
 ```{r}
-ex() %>% check_function("tail",not_called_msg="Have you used `tail` to view the last 6 observations of the data?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified which dataframe you would like to view?") %>% check_equal(incorrect_msg="Make sure to use tail to see the las 6 entries in `injury`.")
-ex() %>% check_function("subset",not_called_msg="Have you called `subset` to create a subset of our original data?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified the original data you would like to take a subset from?") %>% check_equal(incorrect_msg="Make sure to create a subset of `injury`.")
-ex() %>% check_object("injury2") %>% check_equal(incorrect_msg="Make sure that `injury2` is the same as `injury` but without the largest claim. Try and think of creative ways to remove that observation from the data!")
-ex() %>% check_function("summary",index=1,not_called_msg="Have you called `summary` to view basic statistics about the data?") %>% check_arg(., "object",arg_not_specified_msg="Have you specified which data you would like a summary of?") %>% check_equal(incorrect_msg="Make sure to get summary statistics of `injury`.")
-ex() %>% check_function("summary",index=2,not_called_msg="Have you called `summary` to view basic statistics about the data?") %>% check_arg(., "object",arg_not_specified_msg="Have you specified which data you would like a summary of?") %>% check_equal(incorrect_msg="Make sure to get summary statistics of `injury2`.")
-ex() %>% check_function("par",not_called_msg="Have you called `par` to change the graphical parameters?") %>% check_arg(., "mfrow", arg_not_specified_msg="Have you specified the number of rows/columns for your plot to have?") %>% check_equal(incorrect_msg="Please dont change this part. it should read `par(mfrow=c(2,1))`")
-ex() %>% check_function("hist",index=1,not_called_msg="Have you called `hist` to create a histogram of the data?") %>% {
-  check_arg(., "x",arg_not_specified_msg="Have you specified which data should be used to create a histogram?") %>% check_equal(incorrect_msg="Create the first histogram using all of the observed claims.")
-  check_arg(., "freq",arg_not_specified_msg="Have you specified that we would like a density histogram?") %>% check_equal(incorrect_msg="Make sure to create a density histogram instead of a frequency histogram.")
-}
-ex() %>% check_function("hist",index=2,not_called_msg="Have you called `hist` to create another histogram of the data?") %>% {
-  check_arg(., "x",arg_not_specified_msg="Have you specified which data should be used to create a histogram?") %>% check_equal(incorrect_msg="Make sure to create the second histogram based on claims with the largest one removed.")
-  check_arg(., "freq",arg_not_specified_msg="Have you specified that we would like a density histogram?") %>% check_equal(incorrect_msg="Make sure to create a density histogram instead of a frequency histogram.")
-}
-success_msg("Congratulations! The goal of predictive modeling is to discover patterns in the data. However, sometimes seeming 'patterns' are the result of one or two unusual observations. Unusual observations may be due to incorrect data gathering procedures or just due to wild fluctuations in a process of interest but are common in predictive modeling.")
+ex() %>% check_function("par",not_called_msg="Have you called `par` to change the graphical parameters?") %>% check_arg(., "mfrow", arg_not_specified_msg="Have you specified the number of rows/columns for your plot to have?") %>% check_equal(incorrect_msg="Please dont change this part. it should read `par(mfrow=c(2,2))`")
+
+ex() %>% check_function("plot",index=1,not_called_msg="Did you plot the density of claims?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified which data should be plotted?") %>% check_equal(incorrect_msg="Make sure to create the first histogram using `claims`")
+
+ex() %>% check_or(
+check_function(.,"plot",not_called_msg="did you plot the square root of claims?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified which data should be plotted?") %>% check_equal(incorrect_msg="Make sure to create the second histogram based on the square root of `claims`."),
+  override_solution(.,"plot(density(sqrt(claims)))") %>% check_function("plot",not_called_msg="did you plot the square root of claims?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified which data should be plotted?") %>% check_equal(incorrect_msg="Make sure to create the second histogram based on the square root of `claims`.")
+)
+
+ex() %>% check_function("plot",index=3,not_called_msg="Did you plot the density of logarithmic claims?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified which data should be plotted?") %>% check_equal(incorrect_msg="Make sure to create the third histogram based on the natural log of `claims`.")
+
+ex() %>% check_function("plot",index=4,not_called_msg="Did you plot the density of the negative reciprocal of claims?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified which data should be plotted?") %>% check_equal(incorrect_msg="Make sure to create the fourth histogram based on the negative reciprocal () of `claims`.")
+
+success_msg("Excellent! Transformations of data is a tool that incredibly expands potential applicability of (linear) regression techniques.")
 ```
