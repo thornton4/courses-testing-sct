@@ -53,7 +53,7 @@ qqline(claims)
 ```{r}
 ex() %>% check_function("boxplot",not_called_msg="Make sure to use `boxplot` to create a visual representation of the data.") %>% check_arg(., "x", arg_not_specified_msg="Have you specified the data R should use to create the boxplot?") %>% check_equal(incorrect_msg="Please create a boxplot of `claims`.")
 ex() %>% check_function("quantile",not_called_msg="Have you called `quantile` to find the empirical percentile?") %>% {
-  check_arg("probs",arg_not_specified_msg="Have you specified what empirical percentile we would like to find?") %>% check_equal(incorrect_msg="If we want to find the Yth percentile, make sure to set probs equal to Y in decimal format.")
+  check_arg(., "probs",arg_not_specified_msg="Have you specified what empirical percentile we would like to find?") %>% check_equal(incorrect_msg="If we want to find the Yth percentile, make sure to set probs equal to Y in decimal format.")
   check_arg(., "x",arg_not_specified_msg="Have you specified which data R should use to find the 25th empirical percentile?") %>% check_equal(incorrect_msg="Make sure to find the 25th empirical percentile of `claims`.")
   }
 ex() %>% check_object("q25",undefined_msg="Make sure to assign the 25th quantile to `q25") %>% check_equal(incorrect_msg="Make sure to find the 25th quantile of claims.")
