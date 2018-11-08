@@ -54,7 +54,7 @@ ex() %>% check_function("hist",not_called_msg="Make sure to use `hist` to create
   check_arg(., "breaks",arg_not_specified_msg="Did you specify the number of breaks we would like in our histogram?") %>% check_equal(incorrect_msg="Make sure to set breaks equal to 40!")
 }
 ex() %>% check_function("box",not_called_msg="Make sure to call `box` in order to create a decorative box around our histogram!")
-ex() %>% check_function("plot",index=1,not_called_msg="Have you plotted the density of the log of claims?") %>% check_arg("x",arg_not_specified_msg="Have you specified the data we should use to create the plot?") %>% check_equal(incorrect_msg="Use the density function to plot the density of logclaims.")
+ex() %>% check_function("plot",index=1,not_called_msg="Have you plotted the density of the log of claims?") %>% check_arg(.,"x",arg_not_specified_msg="Have you specified the data we should use to create the plot?") %>% check_equal(incorrect_msg="Use the density function to plot the density of logclaims.")
 ex() %>% check_function("plot",index=2,not_called_msg="Create another plot using `plot` that displays the density of logarithmic claims with a binwidtch of 0.03.") %>%
   check_arg(., "x",arg_not_specified_msg="Have you specified the data we should use to create the plot?") %>% check_equal(incorrect_msg="Use the density function to plot the density of logclaims.")
   check_arg(., "bw",arg_not_specified_msg="Have you specified that our new binwidth?") %>% check_equal(incorrect_msg="While any value of binwidth is fine, please use a binwidth of 0.03 to see the imapct!")
