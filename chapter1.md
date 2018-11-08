@@ -57,7 +57,6 @@ ex() %>% check_function("box",not_called_msg="Make sure to call `box` in order t
 ex() %>% check_function("plot",index=1,not_called_msg="Have you plotted the density of the log of claims?") %>% check_arg(.,"x",arg_not_specified_msg="Have you specified the data we should use to create the plot?") %>% check_equal(incorrect_msg="Use the density function to plot the density of logclaims.")
 ex() %>% check_function("plot",index=2,not_called_msg="Create another plot using `plot` that displays the density of logarithmic claims with a binwidtch of 0.03.") %>%
   check_arg(., "x",arg_not_specified_msg="Have you specified the data we should use to create the plot?") %>% check_equal(incorrect_msg="Use the density function to plot the density of logclaims.")
-  check_arg(., "bw",arg_not_specified_msg="Have you specified that our new binwidth?") %>% check_equal(incorrect_msg="While any value of binwidth is fine, please use a binwidth of 0.03 to see the imapct!")
 success_msg("Excellent! Visualizing the distribution is important and smoothing techniques allow viewers to see important patterns without being distracted by random fluctations.")
  
 ```
