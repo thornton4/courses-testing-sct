@@ -23,42 +23,41 @@ I wish I knew what to tell you bud!
 
 `@pre_exercise_code`
 ```{r}
-#heights <- read.csv("CSVData\\galton_height.csv",header = TRUE)
-heights <- read.csv("https://assets.datacamp.com/production/repositories/2610/datasets/c85ede6c205d22049e766bd08956b225c576255b/galton_height.csv", header = TRUE)
-ht_child <- heights$child_ht
-mchild <- mean(ht_child)
-sdchild <- sd(ht_child)
+injury <- read.csv("https://assets.datacamp.com/production/repositories/2610/datasets/8cca19d0503fcf6e9d30d9cb912de5ba95ecb9c1/MassBI.csv", header = TRUE)
+claims <- injury$claims
 ```
 
 `@sample_code`
 ```{r}
-hist(ht_child, freq = FALSE)
-x <- seq(60, 80,by = 0.1)
-lines(x, dnorm(x, mean = mchild, sd = sdchild), col = "blue")
-prob <- 1 - pnorm(72, mean = mchild , sd = sdchild)
-prob
+logclaims <- log(claims)
+hist(logclaims , breaks = 40,freq = FALSE)
+box()
+plot(density(logclaims))
+plot(density(logclaims, bw = 0.03))
 ```
 
 `@solution`
 ```{r}
-hist(ht_child, freq = FALSE)
-x <- seq(60, 80,by = 0.1)
-lines(x, dnorm(x, mean = mchild, sd = sdchild), col = "blue")
-prob <- 1 - pnorm(72, mean = mchild , sd = sdchild)
-prob
+logclaims <- log(claims)
+hist(logclaims , breaks = 40,freq = FALSE)
+box()
+plot(density(logclaims))
+plot(density(logclaims, bw = 0.03))
 ```
 
 `@sct`
 ```{r}
-ex() %>% check_function("hist",not_called_msg="Use the hist command to create a histogram of the children's heights.") %>% {
-  check_arg(., "x",arg_not_specified_msg="Have you specified what data to make a histogram from?") %>% check_equal(incorrect_msg="Make sure to create a histogram of the children's heights.")
-  check_arg(., "freq",arg_not_specified_msg="Have you specified that you would like a density histogram?") %>% check_equal(incorrect_msg="Make sure to create a density histogram instead of a frequency histogram.")
+ex() %>% check_object("logclaims",undefined_msg="Make sure to assign the log of the claims data to `logclaims`.") %>% check_equal(incorrect_msg = "You made an error in the definition of the logarithmic claims. Check out the definition of the log() function.")
+ex() %>% check_function("hist",not_called_msg="Make sure to use `hist` to create a histogram.") %>% {
+  check_arg(., "x",arg_not_specified_msg="Did you assign x to be the log of our claims data?") %>% check_equal(incorrect_msg="Please create a histogram of logclaims.")
+  check_arg(., "freq",arg_not_specified_msg="Did you specify that we would like a density histogram?") %>% check_equal(incorrect_msg="Please create a density histogram instead of a frequency histogram.")
+  check_arg(., "breaks",arg_not_specified_msg="Did you specify the number of breaks we would like in our histogram?") %>% check_equal(incorrect_msg="Make sure to set breaks equal to 40!")
 }
-ex() %>% check_function("lines",not_called_msg="Please use the lines function to overlay a normal curve on your histogram") %>% {
-  check_arg(., "x",arg_not_specified_msg="Have you specified the independant variable correctly?") %>% check_equal(incorrect_msg="Remeber that we are interested in how probability changes as our value of x changes!")
-  check_arg(., "y",arg_not_specified_msg="Have you specified the dependant variable correctly?") %>% check_equal(incorrect_msg="Remeber that we are interested in how probability changes as our value of x changes!")
-}
-ex() %>% check_object("prob", undefined_msg="Make sure to assign the probability of a child's height being greater than 72 inches to prob.") %>% check_equal(incorrect_msg="Make sure to find the probability of a child's height being GREATER than 72 inches.")
-success_msg("Excellent! Visualizing a distribution, especially with reference to a normal, is important for communicating results of your analysis.")
+ex() %>% check_function("box",not_called_msg="Make sure to call `box` in order to create a decorative box around our histogram!")
+ex() %>% check_function("plot",index=1,not_called_msg="Have you plotted the density of the log of claims?") %>% check_arg("x",arg_not_specified_msg="Have you specified the data we should use to create the plot?") %>% check_equal(incorrect_msg="Use the density function to plot the density of logclaims.")
+ex() %>% check_function("plot",index=2,not_called_msg="Create another plot using `plot` that displays the density of logarithmic claims with a binwidtch of 0.03.") %>% {
+  check_arg(., "x",arg_not_specified_msg="Have you specified the data we should use to create the plot?") %>% check_equal(incorrect_msg="Use the density function to plot the density of logclaims.")
+  check_arg(., "bw",arg_not_specified_msg="Have you specified that our new binwidth?") %>% check_equal(incorrect_msg="While any value of binwidth is fine, please use a binwidth of 0.03 to see the imapct!")
+success_msg("Excellent! Visualizing the distribution is important and smoothing techniques allow viewers to see important patterns without being distracted by random fluctations.")
 
 ```
