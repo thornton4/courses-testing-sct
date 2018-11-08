@@ -61,7 +61,7 @@ ex() %>% check_function("hist",index=1,not_called_msg="Have you called `hist` to
   check_arg(., "x",arg_not_specified_msg="Have you specified which data should be used to create a histogram?") %>% check_equal(incorrect_msg="Create the first histogram using all of the observed claims.")
   check_arg(., "freq",arg_not_specified_msg="Have you specified that we would like a density histogram?") %>% check_equal(incorrect_msg="Make sure to create a density histogram instead of a frequency histogram.")
 }
-ex() %>% check_function("hist",index=2,not_called_msg="Have you called `hist` to create a histogram of the data?") %>% {
+ex() %>% check_function("hist",index=2,not_called_msg="Have you called `hist` to create another histogram of the data?") %>% {
   check_arg(., "x",arg_not_specified_msg="Have you specified which data should be used to create a histogram?") %>% check_equal(incorrect_msg="Make sure to create the second histogram based on claims with the largest one removed.")
   check_arg(., "freq",arg_not_specified_msg="Have you specified that we would like a density histogram?") %>% check_equal(incorrect_msg="Make sure to create a density histogram instead of a frequency histogram.")
 }
