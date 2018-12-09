@@ -23,46 +23,39 @@ I wish I knew what to tell you bud!
 
 `@pre_exercise_code`
 ```{r}
-injury <- read.csv("https://assets.datacamp.com/production/repositories/2610/datasets/8cca19d0503fcf6e9d30d9cb912de5ba95ecb9c1/MassBI.csv", header = TRUE)
-claims <- injury$claims
+#Lot <- read.csv("CSVData\\Wisc_lottery.csv", header = TRUE)
+Lot <- read.csv("https://assets.datacamp.com/production/repositories/2610/datasets/a792b30fb32b0896dd6894501cbab32b5d48df51/Wisc_lottery.csv", header = TRUE)
 ```
 
 `@sample_code`
 ```{r}
-par(mfrow = c(2, 2))
-plot(density(claims))    
-plot(density(claims^(0.5)))  
-plot(density(log(claims)))  
-plot(density(-claims^(-1)))  
+Lot$pop_1000 <- Lot$pop/1000
+Lot$sales_1000 <- Lot$sales/1000
+summary(Lot)
+plot(Lot$pop_1000, Lot$sales_1000)
+cor(Lot$pop_1000, Lot$sales_1000) 
 ```
 
 `@solution`
 ```{r}
-par(mfrow = c(2, 2))
-plot(density(claims))    
-plot(density(claims^(0.5)))  
-plot(density(log(claims)))  
-plot(density(-claims^(-1))) 
+Lot$pop_1000 <- Lot$pop/1000
+Lot$sales_1000 <- Lot$sales/1000
+summary(Lot)
+plot(Lot$pop_1000, Lot$sales_1000)
+cor(Lot$pop_1000, Lot$sales_1000)
 ```
 
 `@sct`
 ```{r}
-ex() %>% check_function("par",not_called_msg="Have you called `par` to change the graphical parameters?") %>% check_arg(., "mfrow", arg_not_specified_msg="Have you specified the number of rows/columns for your plot to have?") %>% check_equal(incorrect_msg="Please dont change this part. it should read `par(mfrow=c(2,2))`")
-
-ex() %>% check_function("plot",index=1,not_called_msg="Did you plot the density of claims?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified which data should be plotted?") %>% check_equal(incorrect_msg="Make sure to create the first histogram using `claims`")
-
-ex() %>% check_or(
-check_function(.,"plot",index=2,not_called_msg="did you plot the square root of claims?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified which data should be plotted?") %>% check_equal(incorrect_msg="Make sure to create the second histogram based on the square root of `claims`."),
-  override_solution(.,'par(mfrow = c(2, 2))
-plot(density(claims))    
-plot(density(sqrt(claims)))  
-plot(density(log(claims)))  
-plot(density(-claims^(-1)))') %>% check_function("plot",index=2,not_called_msg="did you plot the square root of claims?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified which data should be plotted?") %>% check_equal(incorrect_msg="Make sure to create the second histogram based on the square root of `claims`.")
-)
-
-ex() %>% check_function("plot",index=3,not_called_msg="Did you plot the density of logarithmic claims?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified which data should be plotted?") %>% check_equal(incorrect_msg="Make sure to create the third histogram based on the natural log of `claims`.")
-
-ex() %>% check_function("plot",index=4,not_called_msg="Did you plot the density of the negative reciprocal of claims?") %>% check_arg(., "x",arg_not_specified_msg="Have you specified which data should be plotted?") %>% check_equal(incorrect_msg="Make sure to create the fourth histogram based on the negative reciprocal () of `claims`.")
-
-success_msg("Excellent! Transformations of data is a tool that incredibly expands potential applicability of (linear) regression techniques.")
+ex() %>% check_object("Lot") %>% {
+  check_column(., "pop_1000") %>% check_equal()
+  check_column(., "sales_1000") %>% check_equal()
+}
+ex() %>% check_function("summary") %>% check_result() %>% check_equal()
+ex() %>% check_function("plot") %>%{
+  check_arg(., "x") %>% check_equal()
+  check_arg(., "y") %>% check_equal()
+}
+ex() %>% check_function("cor") %>% check_result() %>% check_equal()
+success_msg("Congratulations! We will rescale data using 'linear' transformations regularly. In part we do this for communicating our analysis to others. Also in part, this is for our own convenience as it can allow us to see patterns more readily.")
 ```
