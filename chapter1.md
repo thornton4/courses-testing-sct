@@ -51,7 +51,7 @@ ex() %>% check_object("Lot") %>% {
   check_column(., "pop_1000") %>% check_equal()
   check_column(., "sales_1000") %>% check_equal()
 }
-ex() %>% check_function("summary", not_called_msg="Use the `sumamry` function.") %>% check_result() %>% check_equal()
+ex() %>% check_function("summary", not_called_msg="Use the 'sumamry' function.") %>% check_result() %>% check_equal()
 ex() %>% check_function("plot") %>%{
   check_arg(., "x") %>% check_equal()
   check_arg(., "y") %>% check_equal()
