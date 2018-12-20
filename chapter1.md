@@ -86,8 +86,8 @@ ex() %>% check_function("plot", not_called_msg="Create a plot of population vs s
   check_arg(., "x") %>% check_equal(incorrect_msg="The x variable should be all of the population observations. ")
   check_arg(., "y") %>% check_equal(incorrect_msg="They y variable should be all of the sales observations. ")
 }
-ex() %>% check_function("abline",index=1,not_called_msg="plot the regression of `model_blr` using `abline`.") %>% check_arg(., "reg") %>% check_equal(incorrect_msg="The first line should be for `model_blr`.")
-ex() %>% check_function("abline",index=2,not_called_msg="plot the regression of `model_Kenosha` using `abline`.") %>% check_arg(., "reg") %>% check_equal(incorrect_msg="The second line should be for `model_Kenosha`.")
+ex() %>% check_function("abline",index=1,not_called_msg="plot the regression of `model_blr` using `abline`.") %>% check_arg(., "a") %>% check_equal(incorrect_msg="The first line should be for `model_blr`.")
+ex() %>% check_function("abline",index=2,not_called_msg="plot the regression of `model_Kenosha` using `abline`.") %>% check_arg(., "a") %>% check_equal(incorrect_msg="The second line should be for `model_Kenosha`.")
 ex() %>% check_function("par",not_called_msg="Set up the plotting window so it has 2 graphs using `par`.") %>% check_arg(., "mfrow") %>% check_equal(incorrect_msg="Make sure to create 2 side-by-side graphs! ")
 ex() %>% check_function("qqnorm",index=1,not_called_msg="Create a qq-plot for `model_blr` using `qqnorm`.") %>% check_arg(., "y") %>% check_equal(incorrect_msg="The first graph should be for `model_blr`.")
 ex() %>% check_function("qqline",index=1,not_called_msg="Add a qq-line to the graph for `model_blr`.") %>% check_arg(., "y") %>% check_equal(incorrect_msg="The first line should be for `model_blr`.")
