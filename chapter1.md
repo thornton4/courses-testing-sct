@@ -25,6 +25,8 @@ You can extract the residuals from a regression object with the function [residu
 ```{r}
 #Lot <- read.csv("CSVData\\Wisc_lottery.csv", header = TRUE)
 Lot <- read.csv("https://assets.datacamp.com/production/repositories/2610/datasets/a792b30fb32b0896dd6894501cbab32b5d48df51/Wisc_lottery.csv", header = TRUE)
+Lot$pop_1000 <- Lot$pop/1000
+Lot$sales_1000 <- Lot$sales/1000
 ```
 
 `@sample_code`
