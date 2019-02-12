@@ -43,6 +43,6 @@ data.chisq$chisq=((data.chisq$O-data.chisq$E)^2)/data.chisq$E
 
 `@sct`
 ```{r}
-ex() %>% check_object("data.chisq") %>% check_equal()
+ex() %>% check_object("data.chisq") %>% check_col(., "chisq") %>% check_equal()
 success_msg="yaaas"
 ```
