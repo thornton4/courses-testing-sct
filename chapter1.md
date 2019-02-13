@@ -24,25 +24,24 @@ You can extract the residuals from a regression object with the function [residu
 
 `@pre_exercise_code`
 ```{r}
-O=c(5,4,8,2,9,3,5)
-E=c(4,6,8,4,8,1,7)
-data.chisq=data.frame(O,E)
+
 ```
 
 `@sample_code`
 ```{r}
-data.chisq$O.E=data.chisq$O-data.chisq$E
-data.chisq$sq=data.chisq$O.E^2
-data.chisq$chisq=data.chisq$sq/data.chisq$E
+lm(hp~mpg, data=mtcars)
 ```
 
 `@solution`
 ```{r}
-data.chisq$chisq=((data.chisq$O-data.chisq$E)^2)/data.chisq$E
+lm(hp~mpg, data=mtcars)
 ```
 
 `@sct`
 ```{r}
-ex() %>% check_object("data.chisq") %>% check_column(., "chisq") %>% check_equal()
+ex() %>% check_function("lm") %>% {
+  check_arg(., "formula") %>% check_equal()
+  check_arg(., "data") %>% check_equal()
+}
 success_msg="yaaas"
 ```
