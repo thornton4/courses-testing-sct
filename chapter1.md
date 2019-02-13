@@ -34,7 +34,7 @@ lm(hp~mpg, data=mtcars)
 
 `@solution`
 ```{r}
-lm(hp~mpg, data=mtcars)
+lm(hp~mpg+cyl, data=mtcars)
 ```
 
 `@sct`
